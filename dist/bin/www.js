@@ -28,7 +28,7 @@ var normalizePort = function (val) {
 /**
  * Get port from environment and store in Express.
  */
-var port = normalizePort(process.env.PORT || "4000");
+var port = normalizePort(process.env.PORT || "8080");
 console.log("port: " + port);
 main_1["default"].set("port", port);
 /**
