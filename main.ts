@@ -22,20 +22,36 @@ const corsOptions = {
 // Add on
 const app = express()
 app.use(cors(corsOptions))
+if (process.env.NODE_ENV === "production") {
+  console.log("Running in production mode")
+} else {
+  console.log("Running in development mode")
+}
+
 app.use(logger("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.get("/status", (req, res): any => {
+  res.send({ Massage: "I am alive." })
+})
 
 // Routes
-
 app.use("/", authRouter)
 app.use("/blockchain", blockChainRouter)
 app.use("/vartix", vartixRouter)
 app.use("/wallet", walletRouter)
 
-app.get("/*", (res: any) => {
+// Error handlers
+app.use((err: any, req: any, res: any, next: () => void) => {
+  console.error(err.stack)
+  res.status(500).send("Something broke!")
+  next()
+})
+// Undefined error
+app.use("/*", (req: any, res: any, next) => {
   res.status(404).json({ Error: "Invalid Address" })
+  next()
 })
 
 export default app
