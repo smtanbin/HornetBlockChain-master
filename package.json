@@ -11,7 +11,7 @@
     "reset": "prisma migrate reset",
     "sync": "prisma format && prisma generate",
     "ps": "prisma studio ",
-    "start": "node ./dist/bin/www.js"
+    "start": "node ./dist/bin/www.js & npm migrate"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0",
