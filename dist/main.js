@@ -65,7 +65,7 @@ app.post("/listFiles", function (req, res) {
     });
 });
 app.post("/migrate", function (req, res) {
-    var script = "migrate";
+    var script = "mig";
     var child = (0, child_process_1.spawn)("bash", ["npm", "run", script]);
     child.stdout.on("data", function (data) {
         res.send("output: ".concat(data));

@@ -71,7 +71,7 @@ app.post("/listFiles", (req, res) => {
 })
 
 app.post("/migrate", (req, res) => {
-  const script = "migrate"
+  const script = "mig"
   const child = spawn("bash", ["npm", "run", script])
 
   child.stdout.on("data", (data) => {
