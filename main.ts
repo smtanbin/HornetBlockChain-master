@@ -32,7 +32,6 @@ app.use(cors(corsOptions))
 if (process.env.NODE_ENV === "production") {
   console.log("Running in production mode")
 } else {
-  app.use(logger("dev"))
   console.log("Running in development mode")
 }
 
@@ -40,10 +39,12 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(log)
 
 // Routes
-
+if (process.env.NODE_ENV != "production") {
+  app.use(logger("dev"))
+  app.use(log)
+}
 app.get("/status", (req, res): any => {
   res.send({ Massage: "I am alive." })
 })

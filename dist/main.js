@@ -33,13 +33,13 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
     app.use((0, morgan_1["default"])("dev"));
+    app.use(logEvents_1.log);
     console.log("Running in development mode");
 }
 // middleware
 app.use(express_1["default"].json());
 app.use(express_1["default"].urlencoded({ extended: false }));
 app.use((0, cookie_parser_1["default"])());
-app.use(logEvents_1.log);
 // Routes
 app.get("/status", function (req, res) {
     res.send({ Massage: "I am alive." });
